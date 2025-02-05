@@ -50,6 +50,9 @@ from litellm.llms.vertex_ai.cost_calculator import cost_router as google_cost_ro
 from litellm.llms.vertex_ai.image_generation.cost_calculator import (
     cost_calculator as vertex_ai_image_cost_calculator,
 )
+from litellm.llms.siliconflow.cost_calculator import (
+    cost_per_token as siliconflow_cost_per_token,
+)
 from litellm.types.llms.openai import HttpxBinaryResponseContent
 from litellm.types.rerank import RerankResponse
 from litellm.types.utils import (

@@ -4019,6 +4019,39 @@ def test_completion_deepseek():
     except Exception as e:
         pytest.fail(f"Error occurred: {e}")
 
+# SiliconFlow tests
+def test_completion_siliconflow():
+    litellm.set_verbose = True
+    model_name = "deepseek-ai/DeepSeek-R1"
+    tools = [
+        {
+            "type": "function",
+            "function": {
+                "name": "get_weather",
+                "description": "Get weather of an location, the user shoud supply a location first",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "location": {
+                            "type": "string",
+                            "description": "The city and state, e.g. San Francisco, CA",
+                        }
+                    },
+                    "required": ["location"],
+                },
+            },
+        },
+    ]
+    messages = [{"role": "user", "content": "How's the weather in Hangzhou?"}]
+    try:
+        response = completion(model=model_name, messages=messages, tools=tools)
+        # Add any assertions here to check the response
+        print(response)
+    except litellm.APIError as e:
+        pass
+    except Exception as e:
+        pytest.fail(f"Error occurred: {e}")
+
 
 @pytest.mark.skip(reason="Account deleted by IBM.")
 def test_completion_watsonx_error():

@@ -16,8 +16,9 @@ export enum Providers {
     Databricks = "Databricks",
     Ollama = "Ollama",
     xAI = "xAI",
+    SiliconFlow = "SiliconFlow",
   }
-  
+
 export const provider_map: Record<string, string> = {
     OpenAI: "openai",
     Azure: "azure",
@@ -34,6 +35,7 @@ export const provider_map: Record<string, string> = {
     xAI: "xai",
     Deepseek: "deepseek",
     Ollama: "ollama",
+    SiliconFlow: "SiliconFlow",
 };
 
 export const providerLogoMap: Record<string, string> = {
@@ -98,9 +100,9 @@ export const getPlaceholder = (selectedProvider: string): string => {
     console.log(`Provider key: ${providerKey}`);
     let custom_llm_provider = provider_map[providerKey];
     console.log(`Provider mapped to: ${custom_llm_provider}`);
-    
+
     let providerModels: Array<string> = [];
-    
+
     if (providerKey && typeof modelMap === "object") {
       Object.entries(modelMap).forEach(([key, value]) => {
         if (
@@ -113,7 +115,7 @@ export const getPlaceholder = (selectedProvider: string): string => {
           providerModels.push(key);
         }
       });
-  
+
       // Special case for cohere_chat
       // we need both cohere_chat and cohere models to show on dropdown
       if (providerKey == Providers.Cohere) {
@@ -130,6 +132,6 @@ export const getPlaceholder = (selectedProvider: string): string => {
         });
       }
     }
-  
+
     return providerModels;
   };

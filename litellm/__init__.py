@@ -411,6 +411,7 @@ anyscale_models: List = []
 cerebras_models: List = []
 galadriel_models: List = []
 sambanova_models: List = []
+siliconflow_models: List = []
 
 
 def is_bedrock_pricing_only_model(key: str) -> bool:
@@ -560,7 +561,8 @@ def add_known_models():
             galadriel_models.append(key)
         elif value.get("litellm_provider") == "sambanova_models":
             sambanova_models.append(key)
-
+        elif value.get("litellm_provider") == "siliconflow":
+            siliconflow_models.append(key)
 
 add_known_models()
 # known openai compatible endpoints - we'll eventually move this list to the model_prices_and_context_window.json dictionary
@@ -684,6 +686,7 @@ models_by_provider: dict = {
     "cerebras": cerebras_models,
     "galadriel": galadriel_models,
     "sambanova": sambanova_models,
+    "siliconflow": siliconflow_models,
 }
 
 # mapping for those models which have larger equivalents
@@ -936,6 +939,7 @@ from .llms.hosted_vllm.chat.transformation import HostedVLLMChatConfig
 from .llms.litellm_proxy.chat.transformation import LiteLLMProxyChatConfig
 from .llms.vllm.completion.transformation import VLLMConfig
 from .llms.deepseek.chat.transformation import DeepSeekChatConfig
+from .llms.siliconflow.chat.transformation import SiliconFlowChatConfig
 from .llms.lm_studio.chat.transformation import LMStudioChatConfig
 from .llms.lm_studio.embed.transformation import LmStudioEmbeddingConfig
 from .llms.perplexity.chat.transformation import PerplexityChatConfig
